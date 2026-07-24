@@ -30,7 +30,43 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 
 ## PROGRAM
+```
+#include <stdio.h>
+#include <string.h>
 
+void vigenereCipher(char *text, char *key, int decrypt)
+{
+    int len = strlen(text);
+    int keyLen = strlen(key);
+
+    for (int i = 0; i < len; i++)
+    {
+        int shift = key[i % keyLen] - 'A';
+
+        if (decrypt)
+            text[i] = 'A' + (text[i] - 'A' - shift + 26) % 26;
+        else
+            text[i] = 'A' + (text[i] - 'A' + shift) % 26;
+    }
+}
+
+int main()
+{
+    char text[] = "CRYPTOGRAPHY";
+    char key[] = "CODE";
+
+    printf("Original Message: %s\n", text);
+
+    vigenereCipher(text, key, 0);
+    printf("Encrypted Message: %s\n", text);
+
+    vigenereCipher(text, key, 1);
+    printf("Decrypted Message: %s\n", text);
+
+    return 0;
+}
+```
 ## OUTPUT
+<img width="416" height="247" alt="image" src="https://github.com/user-attachments/assets/90cfbc90-96a7-4bea-adf4-2a94b1b3c4f7" />
 
 ## RESULT
